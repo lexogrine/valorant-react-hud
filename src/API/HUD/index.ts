@@ -13,80 +13,36 @@ export const GSI = new VALOGSI();
 GSI.regulationMR = 12;
 
 GSI.on("data", data => {
-    //loadPlayers(data.players);
+    loadPlayers([...data.left.players, ...data.right.players]);
 });
 
-const requestedSteamIDs: string[] = [];
+const requestedNames: string[] = [];
 
 const loadPlayers = async (players: Player[]) => {
-    // const leftOvers = players.filter(player => !requestedSteamIDs.includes(player.steamid));
-    // const leftOverSteamids = leftOvers.map(player => player.steamid);
-    // if(!leftOvers.length) return;
+    const leftOvers = players.filter(player => !requestedNames.includes(player.defaultName));
+    const leftOverNames = leftOvers.map(player => player.defaultName);
+    if(!leftOvers.length) return;
 
-    // requestedSteamIDs.push(...leftOverSteamids);
+    requestedNames.push(...leftOverNames);
 
-    // const extensions = await api.players.get(leftOverSteamids);
+    const extensions = (await api.players.get()).filter(player => leftOverNames.includes(player.steamid));
 
-    // const playersExtensions: PlayerExtension[] = extensions.map(player => (
-    //     {
-    //         id: player._id,
-    //         name: player.username,
-    //         realName: `${player.firstName} ${player.lastName}`,
-    //         steamid: player.steamid,
-    //         country: player.country,
-    //         avatar: player.avatar,
-    //         extra: player.extra,
-    //     })
-    // )
 
-    // GSI.players.push(...playersExtensions);
-
+    const playersExtensions: PlayerExtension[] = extensions.map(player => (
+        {
+            id: player._id,
+            name: player.username,
+            realName: `${player.firstName} ${player.lastName}`,
+            steamid: player.steamid,
+            country: player.country,
+            avatar: player.avatar,
+            extra: player.extra,
+        })
+    );
+    GSI.players.push(...playersExtensions);
     
-    // leftOvers.forEach(player => {
-    //     loadAvatarURL(player);
-    // });
+    leftOvers.forEach(player => {
+      //  loadAvatarURL(player);
+    });
 }
 
-
-interface AvatarLoader {
-    loader: Promise<string>,
-    url: string,
-}
-
-const avatars: { [key: string]: AvatarLoader } = {};
-
-const loadAvatarURL = (player: Player) => {
-
-    // if(!player.steamid) return;
-    // if(avatars[player.steamid]) return avatars[player.steamid].url;
-    // avatars[player.steamid] = {
-    //     url: player.avatar || '',
-    //     loader: new Promise((resolve) => {
-    //         api.players.getAvatarURLs(player.steamid).then(result => {
-    //             const avatarUrl = result.custom || result.steam;
-    //             const existing = GSI.players.find(playerEx => playerEx.steamid === player.steamid);
-    //             const target = existing || {
-    //                 id: player.steamid,
-    //                 name: player.name,
-    //                 realName: player.realName,
-    //                 steamid: player.steamid,
-    //                 country: player.country,
-    //                 avatar: player.avatar,
-    //                 extra: player.extra
-    //             }
-    //             if(target) target.avatar = avatarUrl;
-
-    //             if(!existing){
-    //                 GSI.players.push(target);
-    //             }
-
-
-    //             avatars[player.steamid].url = result.custom || result.steam;
-    //             resolve(result.custom || result.custom);
-    //         }).catch(() => {
-    //             delete avatars[player.steamid];
-    //             resolve('');
-    //         });
-    //     })
-    // }
-}

@@ -1,5 +1,4 @@
 import * as I from './types';
-import { MapConfig } from '../HUD/Radar/LexoRadar/maps';
 
 
 const query = new URLSearchParams(window.location.search);
@@ -34,21 +33,7 @@ const api = {
     },
     camera: {
         get: (): Promise<{ availablePlayers: ({steamid:string, label: string})[], uuid: string }> => apiV2('camera'),
-        toggleVmix: (status?: boolean) => new Promise<boolean>(r => {
-            const controller = new AbortController();
-            const signal = controller.signal;
-           // let finished = false;
-            const timeoutId = setTimeout(() => {
-                controller.abort();
-                r(false);
-            }, 1000)
-            fetch(`http://localhost:2715/visibility${status !== undefined ? `?status=${status}` : ''}`, { method: "POST", signal }).then(() => {
-                clearTimeout(timeoutId);
-                r(true);
-                //finished = true;
-            }).catch(() => { r(false); });
 
-        })
     },
     teams: {
         getOne: async (id: string): Promise<I.Team> => apiV2(`teams/${id}`),
@@ -60,9 +45,6 @@ const api = {
     },
     tournaments: {
         get: () => apiV2('tournament')
-    },
-    maps: {
-        get: (): Promise<{ [key: string] : MapConfig}> => apiV2('radar/maps')
     }
 }
 

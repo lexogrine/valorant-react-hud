@@ -1,20 +1,19 @@
-import Player from './Player'
-import * as I from 'csgogsi';
+import { Player } from '../../API/contexts/valorant';
+import PlayerBox from './Player'
 import './players.scss';
 
 interface Props {
-  players: I.Player[],
-  team: I.Team,
-  side: 'right' | 'left',
-  current: I.Player | null,
+  players: Player[],
+  //team: I.Team,
+  orientation: 'right' | 'left',
+  //current: I.Player | null,
 }
-const TeamBox = ({players, team, side, current}: Props) => {
+const TeamBox = ({players, orientation }: Props) => {
   return (
-    <div className={`teambox ${team.side} ${side}`}>
-      {players.map(player => <Player
-        key={player.steamid}
+    <div className={`teambox  ${orientation}`}>
+      {players.map(player => <PlayerBox
+        key={player.defaultName}
         player={player}
-        isObserved={!!(current && current.steamid === player.steamid)}
       />)}
     </div>
   );

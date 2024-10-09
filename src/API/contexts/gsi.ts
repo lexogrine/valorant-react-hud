@@ -1,4 +1,4 @@
-import { Valorant } from "./valorant";
+import { Player, Team, Valorant, ValorantRaw } from "./valorant";
 
 export type Events = {
   data: (data: Valorant) => void;
@@ -9,8 +9,9 @@ type BaseEvents = keyof Events;
 
 type EmptyListener = () => void;
 
-type Callback<K> = K extends BaseEvents ? Events[K] | EmptyListener : EmptyListener;
-
+type Callback<K> = K extends BaseEvents
+  ? Events[K] | EmptyListener
+  : EmptyListener;
 
 type EventNames = AnyEventName<BaseEvents>;
 interface EventDescriptor {
@@ -18,23 +19,25 @@ interface EventDescriptor {
   once: boolean;
 }
 export interface TeamExtension {
-	id: string;
-	name: string;
-	country: string | null;
-	logo: string | null;
-	map_score: number;
-	extra: Record<string, string>;
+  id: string;
+  name: string;
+  country: string | null;
+  logo: string | null;
+  map_score: number;
+  extra: Record<string, string>;
 }
 export interface PlayerExtension {
-	id: string;
-	name: string;
-	steamid: string;
-	realName: string | null;
-	country: string | null;
-	avatar: string | null;
-	extra: Record<string, string>;
+  id: string;
+  name: string;
+  steamid: string;
+  realName: string | null;
+  country: string | null;
+  avatar: string | null;
+  extra: Record<string, string>;
 }
 
+const defaultSides = ["DEFENDER", "ATTACKER"] as const;
+const reversedSides = ["ATTACKER", "DEFENDER"] as const;
 
 class VALOGSI {
   private descriptors: Map<EventNames, EventDescriptor[]>;
@@ -59,7 +62,7 @@ class VALOGSI {
     this.players = [];
     this.overtimeMR = 3;
     this.regulationMR = 15;
-}
+  }
   eventNames = () => {
     const listeners = this.descriptors.entries();
     const nonEmptyEvents: EventNames[] = [];
@@ -179,13 +182,70 @@ class VALOGSI {
     return this.descriptors.get(eventName) || [];
   };
 
-  digest = (data: Valorant): Valorant | null => {
-    this.emit("data", data);
-    return data;
+  digest = (raw: ValorantRaw): Valorant | null => {
+    const round = raw.left.score + raw.right.score + 1;
+    const isReversed = round > 12 && (round <= 24 || (round - 24) % 2 === 1);
+    const [leftType, rightType] = isReversed ? reversedSides : defaultSides;
+
+    const left: Team = {
+      name: this.teams.left?.name || leftType,
+      side: leftType,
+      score: raw.left.score,
+      roundHistory: raw.left.roundHistory,
+      players: [], // raw.left.players.map(pl => this.parsePlayerData(pl, left)),
+      series: this.teams.left?.map_score || 0,
+      logo: this.teams.left?.logo || undefined,
+    };
+    left.players = raw.left.players.map((pl) => this.parsePlayerData(pl, left));
+    const right: Team = {
+      name: this.teams.right?.name || rightType,
+      side: rightType,
+      score: raw.right.score,
+      roundHistory: raw.right.roundHistory,
+      players: [], // raw.right.players.map(pl => this.parsePlayerData(pl, right)),
+      series: this.teams?.right?.map_score || 0,
+      logo: this.teams.right?.logo || undefined,
+    };
+    right.players = raw.right.players.map((pl) =>
+      this.parsePlayerData(pl, right)
+    );
+
+    const valorantData: Valorant = {
+      timer: raw.timer,
+      spikeState: raw.spikeState,
+      left: left,
+      right: right,
+    };
+    this.emit("data", valorantData);
+    return valorantData;
+  };
+
+  private parsePlayerData = (
+    player: ValorantRaw["left"]["players"][number],
+    team: Player["team"]
+  ): Player => {
+    const ext = this.players.find((p) => p.steamid === player.username);
+    return {
+      username: ext?.name || player.username,
+      agent: player.agent,
+      hp: player.hp,
+      weapon: player.observed?.weapon || player.scoreboard?.weapon || undefined,
+      defaultName: player.username,
+      avatar: ext?.avatar ?? undefined,
+      team,
+      state: {
+        health: player.observed?.health ?? player.hp,
+        kills: player.scoreboard?.kills ?? 0,
+        assists: player.scoreboard?.assists ?? 0,
+        deaths: player.scoreboard?.deaths ?? 0,
+        ultimate: {
+          state: player.scoreboard?.ultProgress ?? 0,
+          max: player.scoreboard?.maxUltProgress ?? 0,
+        },
+      },
+      credits: player.observed?.credits ?? player.scoreboard?.credits ?? 0,
+    };
   };
 }
 
-export {
-    type Valorant,
-    VALOGSI
-};
+export { type Valorant, VALOGSI };

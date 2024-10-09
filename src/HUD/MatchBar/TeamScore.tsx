@@ -1,38 +1,37 @@
 import TeamLogo from './TeamLogo';
 import PlantDefuse from "../Timers/PlantDefuse"
-import WinAnnouncement from "./WinIndicator";
 import { useState } from "react";
+import { Team } from '../../API/contexts/valorant';
 
 
-export type Team = {
-  name: string,
-  score: number,
-  series: number,
-  side: "ATTACKER" | "DEFENDER",
-  logo?: string
-}
 
 
 interface IProps {
   orientation: "left" | "right";
   team: Team;
+  bo: number
 }
 
-const TeamScore = ({orientation, team }: IProps) => {
-
+const TeamScore = ({orientation, team, bo }: IProps) => {
+    const toWin = Math.floor((bo+1)/2)
+    const scr = new Array(toWin).fill(0).map((_, i) => i+1);
 
     return (
-      <div className={`team-container ${orientation} ${team.side}`}>
-        <div className="logo-container">
+      <div className={`team-container ${orientation}`}>
+        <div className={`logo-container ${!team.logo ? 'no-logo': ''}  ${team.side}`}>
           {team.logo && <img src={team.logo} alt="Team logo" />}
         </div>
         <div className="team-name">
           {team.name ?? team.side}
         </div>
-        <div className="series-container">
-
+        <div className={`series-container ${team.side}`}>
+          {
+            bo <= 1 ? null : scr.map(s => (
+              <div className={`series-box ${s <= team.series ? 'win':''}`} />
+            ))
+          }
         </div>
-        <div className="score-container">
+        <div className={`score-container `}>
           {team.score}
         </div>
       </div>

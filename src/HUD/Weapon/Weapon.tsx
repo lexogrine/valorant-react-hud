@@ -1,24 +1,15 @@
 import React from "react";
-import * as Weapons from "./../../assets/Weapons";
+import * as Weapons from "./../../assets/weapons/weapons";
 
-interface IProps extends React.SVGProps<SVGSVGElement> {
+interface IProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   weapon: string;
-  active: boolean;
-  isGrenade?: boolean;
 }
-const WeaponImage = ({ weapon, active, isGrenade, ...rest }: IProps) => {
-  const weaponId = weapon.replace("weapon_", "");
-  const Weapon = (Weapons as any)[weaponId];
-  const { className, ...svgProps } = rest;
-  if (!Weapon) return null;
+const WeaponImage = ({ weapon, ...x }: IProps) => {
+  const { className, ...rest } = x;
+  const weaponSrc = (Weapons as any)[weapon];
+  if (!weaponSrc) return null;
   return (
-    <Weapon
-      fill="white"
-      className={`${active ? "active" : ""} weapon ${
-        isGrenade ? "grenade" : ""
-      } ${className || ""}`}
-      {...svgProps}
-    />
+    <img src={weaponSrc} alt={weapon} {...rest} className={`weapon ${className || ""}`} />
   );
 };
 

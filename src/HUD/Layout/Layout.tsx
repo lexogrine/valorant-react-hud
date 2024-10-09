@@ -1,11 +1,9 @@
 import { useState } from "react";
 import TeamBox from "./../Players/TeamBox";
 import MatchBar from "../MatchBar/MatchBar";
-import Observed from "./../Players/Observed";
 import { Match } from "../../API/types";
 import { useAction } from "../../API/contexts/actions";
-import { Valorant } from "../../API/contexts/valorant";
-import { Team } from "../MatchBar/TeamScore";
+import { Valorant, Player, Team } from "../../API/contexts/valorant";
 
 interface Props {
   game: Valorant,
@@ -30,26 +28,15 @@ const Layout = ({game,match}: Props) => {
   // const leftPlayers = game.players.filter(player => player.team.side === left.side);
   // const rightPlayers = game.players.filter(player => player.team.side === right.side);
   // const isFreezetime = (game.round && game.round.phase === "freezetime") || game.phase_countdowns.phase === "freezetime";
-  const left: Team = {
-    name: "Ts",
-    side: "ATTACKER",
-    score: 5,
-    series: 1
-  }
-  const right: Team = {
-    name: "CTs",
-    side: "DEFENDER",
-    score: 3,
-    series: 0
-  }
+  const round = game.left.score + game.right.score + 1;
   return (
     <div className="layout">
 
-      <MatchBar time={30} left={left} right={right} maxRounds={13} currentRound={9}  match={match} />
+      <MatchBar spikeState={game.spikeState} time={game.timer} left={game.left} right={game.right} maxRounds={24} currentRound={round}  match={match} />
 
 
-      <TeamBox team={left} players={leftPlayers} side="left" current={game.player} />
-      <TeamBox team={right} players={rightPlayers} side="right" current={game.player} />
+      <TeamBox players={game.left.players} orientation="left"  />
+      <TeamBox players={game.right.players} orientation="right" />
 
     </div>
   );

@@ -4,11 +4,11 @@ import { GSI, hudIdentity } from "./HUD";
 
 import { actions, configs } from "./contexts/actions";
 import { initiateConnection } from "./HUD/camera";
-import { Valorant } from "./contexts/valorant";
+import { Valorant, ValorantRaw } from "./contexts/valorant";
 
 export const socket = io(isDev ? `localhost:${port}` : '/');
 
-socket.on("update", (data: any) => {
+socket.on("update", (data: ValorantRaw) => {
     GSI.digest(data);
 });
 

@@ -11,7 +11,7 @@ import { PlayerData, Valorant, ValorantRaw } from './API/contexts/valorant';
 import { agentList } from './assets/heros/heros';
 import { weaponList } from './assets/weapons/weapons';
 
-export const USE_TEST_DATA = true;
+export const USE_TEST_DATA = false;
 
 const gRandomInt = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1) + min);
 

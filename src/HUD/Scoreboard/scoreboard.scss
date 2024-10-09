@@ -104,6 +104,9 @@
         width: 150px;
         background: linear-gradient(to right, rgba(56, 73, 200, 0.57), transparent);
         border:none !important;
+        &.ATTACKER {
+            background: linear-gradient(to right,rgba(255, 70, 85, 0.57), transparent);
+        }
     }
     .player-entry {
         height: 55px;

@@ -1,5 +1,3 @@
-import TeamLogo from './TeamLogo';
-import PlantDefuse from "../Timers/PlantDefuse"
 import { useState } from "react";
 import { Team } from '../../API/contexts/valorant';
 

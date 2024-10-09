@@ -6,7 +6,7 @@ export const panelDefinition = [
       {
         "type": "select",
         "name": "view_type",
-        "label": "SSelect View Type",
+        "label": "Select View Type",
         "values": [
           {
             "label": "Scoreboard",

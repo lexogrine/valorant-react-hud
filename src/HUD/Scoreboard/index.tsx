@@ -20,7 +20,7 @@ const ScoreboardPlayer = ({ player }: { player: Player }) => {
                 <div className="cellkda">{player.state.assists}</div>
             </div>
             <div className="ultimate-container">
-                ULTIMATE
+                {player.state.ultimate.state || '-' }/{player.state.ultimate.max || '-' }
             </div>
             <div className="weapon-container">
                 <Weapon weapon={player.weapon} />

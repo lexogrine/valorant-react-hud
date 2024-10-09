@@ -1,7 +1,5 @@
 import "./matchbar.scss";
 import TeamScore from "./TeamScore";
-import Bomb from "./../Timers/BombTimer";
-import { useBombTimer } from "./../Timers/Countdown";
 import { Match } from './../../API/types';
 import { Team, Valorant } from "../../API/contexts/valorant";
 

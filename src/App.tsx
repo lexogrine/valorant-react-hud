@@ -69,7 +69,7 @@ function App() {
           }
           if (match.left.id) {
               await api.teams.getOne(match.left.id).then(left => {
-                  const gsiTeamData = { id: left._id, name: left.name, country: left.country, logo: left.logo, map_score: match.left.wins, extra: left.extra };
+                  const gsiTeamData = { id: left._id, name: left.name, country: left.country, logo: left.logo, map_score: match.left.wins, extra: left.extra, shortName: left.shortName };
   
                   if (!isReversed) {
                       GSI.teams.left = gsiTeamData;
@@ -79,7 +79,7 @@ function App() {
           }
           if (match.right.id) {
               await api.teams.getOne(match.right.id).then(right => {
-                  const gsiTeamData = { id: right._id, name: right.name, country: right.country, logo: right.logo, map_score: match.right.wins, extra: right.extra };
+                  const gsiTeamData = { id: right._id, name: right.name, country: right.country, logo: right.logo, map_score: match.right.wins, extra: right.extra, shortName: right.shortName };
   
                   if (!isReversed) GSI.teams.right = gsiTeamData;
                   else GSI.teams.left = gsiTeamData;

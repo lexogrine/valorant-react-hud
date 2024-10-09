@@ -69,13 +69,15 @@ export type Valorant = {
   left: Team;
   right: Team;
 };
-
+type Orientation = "left" | "right";
 export type Team = {
     name: string,
     score: number,
+    shortName: string,
     players: Player[],
     roundHistory: RoundEndType[],
     series: number,
     side: "ATTACKER" | "DEFENDER",
-    logo?: string
+    logo?: string,
+    orientation: Orientation
   }

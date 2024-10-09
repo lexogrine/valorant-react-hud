@@ -1,7 +1,6 @@
 import { Player } from "../../API/contexts/valorant";
 import { nameToImage } from "../../assets/heros/heros";
 import Weapon from "./../Weapon/Weapon";
-import Avatar from "./Avatar";
 import React from "react";
 
 interface IProps {

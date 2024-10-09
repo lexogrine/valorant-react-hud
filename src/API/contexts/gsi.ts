@@ -24,6 +24,7 @@ export interface TeamExtension {
   country: string | null;
   logo: string | null;
   map_score: number;
+  shortName: string,
   extra: Record<string, string>;
 }
 export interface PlayerExtension {
@@ -194,6 +195,8 @@ class VALOGSI {
       roundHistory: raw.left.roundHistory,
       players: [], // raw.left.players.map(pl => this.parsePlayerData(pl, left)),
       series: this.teams.left?.map_score || 0,
+      orientation: "left",
+      shortName: this.teams.left?.shortName || "",
       logo: this.teams.left?.logo || undefined,
     };
     left.players = raw.left.players.map((pl) => this.parsePlayerData(pl, left));
@@ -201,7 +204,9 @@ class VALOGSI {
       name: this.teams.right?.name || rightType,
       side: rightType,
       score: raw.right.score,
+      shortName: this.teams.right?.shortName || "",
       roundHistory: raw.right.roundHistory,
+      orientation: "right",
       players: [], // raw.right.players.map(pl => this.parsePlayerData(pl, right)),
       series: this.teams?.right?.map_score || 0,
       logo: this.teams.right?.logo || undefined,

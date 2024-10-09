@@ -20,7 +20,7 @@ import SPIKE from './SPIKE.png';
 import Stinger from './Stinger.png';
 import Vandal from './Vandal.png';
 export const weaponList = ['Ares', 'Bucky', 'Bulldog', 'Classic', 'Frenzy', 'Ghost', 'Guardian', 'Judge', 'Melee', 'Marshal', 'Odin', 'Operator', 'Outlaw', 'Phantom', 'Sheriff', 'Shorty', 'Spectre', 'Stinger', 'Vandal'];
-export {
+export const weapons = {
     Ares,
     Bucky,
     Bulldog,

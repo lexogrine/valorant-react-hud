@@ -1,9 +1,8 @@
-import { useState } from "react";
 import TeamBox from "./../Players/TeamBox";
 import MatchBar from "../MatchBar/MatchBar";
 import { Match } from "../../API/types";
-import { useAction } from "../../API/contexts/actions";
 import { Valorant, Player, Team } from "../../API/contexts/valorant";
+import { Scoreboard } from "../Scoreboard";
 
 interface Props {
   game: Valorant,
@@ -12,15 +11,8 @@ interface Props {
 
 
 const Layout = ({game,match}: Props) => {
-  const [ forceHide, setForceHide ] = useState(false);
 
-  useAction('boxesState', (state) => {
-    if (state === "show") {
-       setForceHide(false);
-    } else if (state === "hide") {
-      setForceHide(true);
-    }
-  });
+
 
   // const left = game.map.team_ct.orientation === "left" ? game.map.team_ct : game.map.team_t;
   // const right = game.map.team_ct.orientation === "left" ? game.map.team_t : game.map.team_ct;
@@ -31,7 +23,7 @@ const Layout = ({game,match}: Props) => {
   const round = game.left.score + game.right.score + 1;
   return (
     <div className="layout">
-
+      <Scoreboard left={game.left} right={game.right} />
       <MatchBar spikeState={game.spikeState} time={game.timer} left={game.left} right={game.right} maxRounds={24} currentRound={round}  match={match} />
 
 

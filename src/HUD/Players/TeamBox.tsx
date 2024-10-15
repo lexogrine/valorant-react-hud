@@ -11,8 +11,8 @@ interface Props {
 const TeamBox = ({players, orientation }: Props) => {
   return (
     <div className={`teambox  ${orientation}`}>
-      {players.map(player => <PlayerBox
-        key={player.defaultName}
+      {players.map((player, i) => <PlayerBox
+        key={player.defaultName + "_" + i}
         player={player}
       />)}
     </div>

@@ -5,10 +5,12 @@ import { GSI, hudIdentity } from "./HUD";
 import { actions, configs } from "./contexts/actions";
 import { initiateConnection } from "./HUD/camera";
 import { Valorant, ValorantRaw } from "./contexts/valorant";
+import { USE_TEST_DATA } from "../App";
 
 export const socket = io(isDev ? `localhost:${port}` : '/');
 
 socket.on("update", (data: ValorantRaw) => {
+    if(USE_TEST_DATA) return;
     GSI.digest(data);
 });
 

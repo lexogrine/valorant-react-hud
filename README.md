@@ -18,7 +18,7 @@ Fullfledged example of the React HUD made for LHM. It has:
 
 ## Keybinds:
 ### **Left Alt + C**
->Toggles scoreboard
+> Toggles scoreboard
 
 
 ## Preview

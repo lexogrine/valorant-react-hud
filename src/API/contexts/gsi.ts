@@ -24,7 +24,7 @@ export interface TeamExtension {
   country: string | null;
   logo: string | null;
   map_score: number;
-  shortName: string,
+  shortName: string;
   extra: Record<string, string>;
 }
 export interface PlayerExtension {
@@ -248,7 +248,16 @@ class VALOGSI {
           max: player.scoreboard?.maxUltProgress ?? 0,
         },
       },
+      armor: player.scoreboard?.armor ?? "none",
+      isCurrentlyObserved: player.isCurrentlyObserved,
       credits: player.observed?.credits ?? player.scoreboard?.credits ?? 0,
+      creditsHistory: player.creditsHistory,
+      ultHistory: player.ultHistory,
+      loadoutKills: player.loadoutKills,
+      killRoundHistory: player.killRoundHistory,
+      diedAtRound: player.diedAtRound,
+      lastRoundEndState: player.lastRoundEndState,
+      lastLoadout: player.lastLoadout,
     };
   };
 }

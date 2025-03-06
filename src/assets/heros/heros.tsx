@@ -24,6 +24,8 @@ import Tejo from "./Tejo.png";
 import Yoru from "./Yoru.png";
 import Viper from "./Viper.png";
 import Vyse from "./Vyse.png";
+import Waylay from "./Waylay.png";
+
 export const agentList = [
   "Astra",
   "Breach",
@@ -51,6 +53,7 @@ export const agentList = [
   "Yoru",
   "Viper",
   "Vyse",
+  "Waylay",
 ];
 export const nameToImage: Record<string, string | undefined> = {
   Astra,
@@ -79,4 +82,5 @@ export const nameToImage: Record<string, string | undefined> = {
   Yoru,
   Viper,
   Vyse,
+  Waylay,
 };

@@ -1,140 +1,139 @@
 .teambox {
-    position: fixed;
-    bottom: 0px;
-    display: flex;
-    flex-direction: column;
+  position: fixed;
+  bottom: 0px;
+  display: flex;
+  flex-direction: column;
 
-    &.left {
-        left: 0px;
-        .player-name {
-            padding-left: 75px;
-        }
-        .player-health {
-            right: 14px;
-        }
-        .weapon {
-            transform: scaleX(-1);
-        }
-        .player-credits {
-            padding-right: 10px;
-        }
+  &.left {
+    left: 0px;
+    .player-name {
+      padding-left: 75px;
     }
-    &.right {
-        right: 0px;
-        .player {
-            flex-direction: row-reverse;
-        }
-        .player-hp-container {
-            justify-content: flex-end;
-        }
-        .player-health {
-            left: 14px;
-        }
-        .player-name {
-            padding-right: 75px;
-        }
-        .player-credits {
-            padding-left: 10px;
-        }
-        .weapon-and-credits {
-            flex-direction: row-reverse;
-        }
-        .player-name-container {
-            text-align: right;
-        }
-        .hero-container {
-            justify-content: flex-end;
-        }
-        .hero-img {
-            transform: scaleX(-1);
-        }
-    }  
+    .player-health {
+      right: 14px;
+    }
+    .weapon {
+      transform: scaleX(-1);
+    }
+    .player-credits {
+      padding-right: 10px;
+    }
+  }
+  &.right {
+    right: 0px;
     .player {
-        width: 310px;
-        height: 103px;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        color: white;
-        overflow: hidden;
-        position: relative;
-        .hero-container {
-            width: 39px;
-            z-index: 9;
-            height: 100%;
-            display: flex;
-            align-items: flex-end;
-            img {
-                position: absolute;
-                width: 103px;
-                height: 90px;
-                object-fit: contain;
-                object-position: bottom center;
-            }
-        }
-        .player-data {
-            flex: 1;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            position: relative;
-        }
-
-        .player-name-container {
-            width: 100%;
-            height: 32px;
-            background-color: rgba(15, 25, 35, 1);
-            font-size: 15px;
-            font-weight: 500;
-            text-transform: uppercase;
-            line-height: 34px;
-            position: relative;
-        }
-        .player-health {
-            height: 100%;
-            top:0;
-            position: absolute;
-            font-size: 14px;
-            width: 20px;
-            text-align: center;
-            font-weight: 700;
-        }
-        .player-hp-container {
-            width: 100%;
-            height: 4px;
-            display: flex;
-            background-color: rgba(47, 75, 103, 1);
-
-            .player-hp {
-                height: 100%;
-                &.DEFENDER {
-                    background-color: rgba(70, 89, 255, 1);
-                }
-                &.ATTACKER {
-                    background-color: rgba(255, 70, 85, 1);
-                }
-            }
-
-        }
-        .player-credits {
-            font-size: 11px;
-            font-weight: 500;
-        }
-        .weapon-and-credits {
-            height: 53px;
-            width: 100%;
-            background-color: black;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            .weapon {
-                padding-right: 65px;
-                object-position: right;
-                width: 100px;
-                height: 30px;
-                object-fit: contain;
-            }
-        }
+      flex-direction: row-reverse;
     }
+    .player-hp-container {
+      justify-content: flex-end;
+    }
+    .player-health {
+      left: 14px;
+    }
+    .player-name {
+      padding-right: 75px;
+    }
+    .player-credits {
+      padding-left: 10px;
+    }
+    .weapon-and-credits {
+      flex-direction: row-reverse;
+    }
+    .player-name-container {
+      text-align: right;
+    }
+    .hero-container {
+      justify-content: flex-end;
+    }
+    .hero-img {
+      transform: scaleX(-1);
+    }
+  }
+  .player {
+    width: 310px;
+    height: 103px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: white;
+    overflow: hidden;
+    position: relative;
+    .hero-container {
+      width: 39px;
+      z-index: 9;
+      height: 100%;
+      display: flex;
+      align-items: flex-end;
+      img {
+        position: absolute;
+        width: 103px;
+        height: 90px;
+        object-fit: contain;
+        object-position: bottom center;
+      }
+    }
+    .player-data {
+      flex: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      position: relative;
+    }
+
+    .player-name-container {
+      width: 100%;
+      height: 32px;
+      background-color: rgba(15, 25, 35, 1);
+      font-size: 15px;
+      font-weight: 500;
+      text-transform: uppercase;
+      line-height: 34px;
+      position: relative;
+    }
+    .player-health {
+      height: 100%;
+      top: 0;
+      position: absolute;
+      font-size: 14px;
+      width: 20px;
+      text-align: center;
+      font-weight: 700;
+    }
+    .player-hp-container {
+      width: 100%;
+      height: 4px;
+      display: flex;
+      background-color: rgba(47, 75, 103, 1);
+
+      .player-hp {
+        height: 100%;
+        &.DEFENDER {
+          background-color: var(--color-green);
+        }
+        &.ATTACKER {
+          background-color: var(--color-red);
+        }
+      }
+    }
+    .player-credits {
+      font-size: 11px;
+      font-weight: 500;
+    }
+    .weapon-and-credits {
+      height: 53px;
+      width: 100%;
+      background-color: black;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .weapon {
+        padding-right: 65px;
+        object-position: right;
+        width: 100px;
+        height: 30px;
+        object-fit: contain;
+      }
+    }
+  }
 }

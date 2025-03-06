@@ -1,120 +1,115 @@
-
 #matchbar {
-	display: flex;
-	flex-direction: row;
-	position: fixed;
-	justify-content: center;
-	height: 74px;
-	width: 1145px;
-	top: 17px;
-	background-color: rgba(15, 25, 35, 1);
-	left: 50%;
-	transform: translateX(-50%);
-	font-family: "Roboto";
-	color: white;
-	#timer {
-		width: 160px;
-		position: relative;
-	}
-	.logo-container {
-		width: 112px;
-		height: 100%;
-		display: flex;
-		align-items: center;
-		justify-content: center;
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  justify-content: center;
+  height: 74px;
+  width: 1145px;
+  top: 17px;
+  background-color: rgba(15, 25, 35, 1);
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "Roboto";
+  color: white;
+  #timer {
+    width: 160px;
+    position: relative;
+  }
+  .logo-container {
+    width: 112px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-		&.ATTACKER {
-			background-color: rgba(255, 70, 85, 1);
-		}
-		&.DEFENDER {
-			background-color: rgba(56, 73, 200, 1);
-		}
-		&.no-logo {
-			width: 10px;
-		}
-		img {
-			width: 52px;
-			height: 52px;
-			object-fit: contain;
-		}
-	}
-	.time {
-		position: absolute;
-		font-weight: 600;
-		font-size: 22px;
-		text-align: center;
-		width: 100%;
-		top: 15px;
-	}
-	.round {
-		position: absolute;
-		font-size: 10px;
-		opacity: 0.8;
-		text-align: center;
-		width: 100%;
-		top: 44px;
-		text-transform: uppercase;
-		letter-spacing: 0.125rem;
-		font-weight: 300;
-	}
-	.series-container {
-		display: flex;
-		height: 100%;
-		width: 40px;
-		align-items: center;
-		justify-content: center;
-		gap: 5px;
-		
-		&.DEFENDER {
-			--boxColor: rgba(56, 73, 200, 1);
-		}
-		&.ATTACKER {
-			--boxColor: rgba(255, 70, 85, 1)
-		}
-		.win {
-			background-color: var(--boxColor);
-		}
-		
-	}
-	.series-box {
-		width: 5px;
-		height: 23px;
-		background-color: rgba(45, 54, 64, 1);
+    &.ATTACKER {
+      background-color: var(--color-red);
+    }
+    &.DEFENDER {
+      background-color: var(--color-green);
+    }
+    &.no-logo {
+      width: 10px;
+    }
+    img {
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+    }
+  }
+  .time {
+    position: absolute;
+    font-weight: 600;
+    font-size: 22px;
+    text-align: center;
+    width: 100%;
+    top: 15px;
+  }
+  .round {
+    position: absolute;
+    font-size: 10px;
+    opacity: 0.8;
+    text-align: center;
+    width: 100%;
+    top: 44px;
+    text-transform: uppercase;
+    letter-spacing: 0.125rem;
+    font-weight: 300;
+  }
+  .series-container {
+    display: flex;
+    height: 100%;
+    width: 40px;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
 
-	}
-	.team-container {
-		display: flex;
-		flex:1;
-		height: 100%;
-		
-		align-items: center;
+    &.DEFENDER {
+      --boxColor: var(--color-green);
+    }
+    &.ATTACKER {
+      --boxColor: var(--color-red);
+    }
+    .win {
+      background-color: var(--boxColor);
+    }
+  }
+  .series-box {
+    width: 5px;
+    height: 23px;
+    background-color: rgba(45, 54, 64, 1);
+  }
+  .team-container {
+    display: flex;
+    flex: 1;
+    height: 100%;
 
-		&.left .series-container {
-			flex-direction: row-reverse;
-		}
+    align-items: center;
 
-		&.left .team-name {
-			margin-right: auto;
-		}
-		&.right .team-name {
-			margin-left: auto;
-		}
+    &.left .series-container {
+      flex-direction: row-reverse;
+    }
 
+    &.left .team-name {
+      margin-right: auto;
+    }
+    &.right .team-name {
+      margin-left: auto;
+    }
 
-		&.right {
-			flex-direction: row-reverse;
-		}
-	}
-	.score-container {
-		font-size: 39px;
-		font-weight: 300;
-		width: 60px;
-		text-align: center;
-	}
-	.team-name {
-		font-weight: 700;
-		font-size: 30px;
-		padding:0 20px;
-	}
-
+    &.right {
+      flex-direction: row-reverse;
+    }
+  }
+  .score-container {
+    font-size: 39px;
+    font-weight: 300;
+    width: 60px;
+    text-align: center;
+  }
+  .team-name {
+    font-weight: 700;
+    font-size: 30px;
+    padding: 0 20px;
+  }
 }
